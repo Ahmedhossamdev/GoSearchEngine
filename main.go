@@ -15,10 +15,16 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/compress"
 )
 
+// Basic unit test
+func Add(a int, b int) int {
+	return a + b
+}
 
 func main () {
+
+
 	env:= godotenv.Load()
-	
+
 	if env != nil {
 		fmt.Println("Error loading .env file")
 	}
@@ -40,7 +46,7 @@ func main () {
 
 	routes.SetRoutes(app);
 
-	
+
 	go func () {
 		if err := app.Listen(port); err != nil {
 			log.Panic(err)
@@ -48,13 +54,16 @@ func main () {
 
 	}()
 
+
+
 	c:= make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 
    	<- c // Block main thread
 
 
-	app.Shutdown()	
+
+	app.Shutdown()
 
 	fmt.Println("Server is shutting down...")
 }

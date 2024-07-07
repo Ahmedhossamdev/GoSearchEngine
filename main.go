@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Ahmedhossamdev/search-engine/routes"
 	"fmt"
 	"log"
 	"os"
@@ -37,11 +38,9 @@ func main () {
 
 	app.Use(compress.New())
 
-	
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!, first fiber app")
-	})
+	routes.SetRoutes(app);
 
+	
 	go func () {
 		if err := app.Listen(port); err != nil {
 			log.Panic(err)
@@ -55,7 +54,7 @@ func main () {
    	<- c // Block main thread
 
 
-	app.Shutdown()
+	app.Shutdown()	
 
 	fmt.Println("Server is shutting down...")
 }

@@ -1,0 +1,58 @@
+package views
+
+templ template() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
+			<script src="https://cdn.tailwindcss.com"></script>
+			<script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+			// <script src="https://unpkg.com/htmx-ext-response-targets@2.0.0/response-targets.js"></script>
+		</head>
+		<body>
+			{ children... }
+		</body>
+	</html>
+}
+
+templ Home() {
+	@template() {
+		<div class="flex flex-col justify-center items-center">
+			<h1 class="text-2xl py-5">Welcome to our Search Settings</h1>
+			<form
+				class="flex flex-col justify-center items-center gap-5 py-5"
+				hx-post="/login"
+				hx-target="#feedback"
+				hx-indicator="#indicator"
+			>
+				<label class="input input-bordered flex items-center gap-2 w-full">
+					Amount
+					<input type="text" class="grow" name="email" placeholder="5"/>
+				</label>
+				<div class="flex flex-col">
+					<div class="form-control w-52r">
+						<label class="label cursor-pointer">
+							<span class="label-text">Remember me</span>
+							<input type="checkbox" class="toggle toggle-primary" checked="checked"/>
+						</label>
+					</div>
+					<div class="form-control w-52">
+						<label class="label cursor-pointer">
+							<span class="label-text">Remember me</span>
+							<input type="checkbox" class="toggle toggle-secondary" checked="checked"/>
+						</label>
+					</div>
+				</div>
+				<button type="submit" class="btn">submit</button>
+				<div id="indicator" class="htmx-indicator">
+					<div class="flex justify-center items-center w-full">
+						<span class="loading loading-spinner loading-lg text-primary h-20 w-20"></span>
+					</div>
+				</div>
+				<div id="feedback"></div>
+			</form>
+		</div>
+	}
+}

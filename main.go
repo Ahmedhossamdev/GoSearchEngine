@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Ahmedhossamdev/search-engine/db"
 	"Ahmedhossamdev/search-engine/routes"
 	"fmt"
 	"log"
@@ -43,6 +44,8 @@ func main () {
 	})
 
 	app.Use(compress.New())
+
+	db.InitDB()
 
 	routes.SetRoutes(app);
 

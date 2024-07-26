@@ -24,14 +24,15 @@ func InitDB() {
 
 	// uuid-ossp
 
-	err = DBConn.Exec("CREATE EXTERNSTION IF NOT EXISTS \"uuid-ossp\"").Error
+	err = DBConn.Exec("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"").Error
 
 	if err != nil {
 		fmt.Println("Can't install uuid extension")
 		panic(err)
 	}
 
-	err = DBConn.AutoMigrate()
+
+	err = DBConn.AutoMigrate(&User{})
 
 	if err != nil {
 		panic (err)
